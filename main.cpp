@@ -1,8 +1,8 @@
 /*
- * Full Name:     [Your Name]
- * Student ID:    [Your NUID]
+ * Full Name:     Jeremy Calle  
+ * Student ID:    002581809
  * Course:        EECE 2140 - Computing Fundamentals for Engineers
- * Section:       [Your Section]
+ * Section:       Mon, Wed: 2:50pm - 4:30p
  * Semester:      Fall 2026
  * Assignment:    Homework 1 - Quiz Grade Analyzer
  * Compilation:   g++ -std=c++11 main.cpp -o main
@@ -15,42 +15,84 @@
 
 int main()
 {
-    // TODO 1: Declare and initialize the variables you will need to keep
-    //         a running count, sum, minimum, and maximum of the scores
-    //         entered so far. Give each one a starting value that will
-    //         not produce an incorrect result before any score has been
-    //         read.
+ const double A_CUTOFF = 90;
+ const double B_CUTOFF = 80;
+ const double C_CUTOFF = 70;
+ const double D_CUTOFF = 60;
 
-    // TODO 2: Print this prompt exactly once, before reading any input:
-    //         "Enter quiz scores (Ctrl+D / Ctrl+Z to end):"
+ int score;
+ int count = 0;
+ int sum = 0;
+ int min = 0;
+ int max = 0;
 
-    // TODO 3: Read scores one at a time, for as many scores as the user
-    //         enters, updating your count/sum/min/max variables for each
-    //         score read. You do not know in advance how many scores
-    //         will be entered, so the number of times you read a score
-    //         must not be fixed or asked from the user.
+ std::cout << "Enter quiz scores (Ctrl+D / Ctrl+Z to end):" << std::endl;
 
-    // TODO 4: If no scores were entered, print exactly:
-    //         "No scores were entered."
-    //         and end the program without doing anything else below.
+ while (std::cin >> score)
+ {
+    if (count == 0)
+    {
+        min = score;
+        max = score;
+    }
+    else
+    {
+        if (score < min)
+        {
+            min = score;
+        }
 
-    // TODO 5: Compute the class average as a value that can represent a
-    //         fraction (not truncated to a whole number).
+        if (score > max)
+        {
+            max = score;
+        }
+    }
 
-    // TODO 6: Declare named const variables for the five grade cutoffs
-    //         described in the assignment (90, 80, 70, 60), then use
-    //         them (not the raw numbers) to determine the correct letter
-    //         grade for the average.
+    sum = sum + score;
+    count = count + 1; 
+}
 
-    // TODO 7: Print the final summary in the exact format described in
-    //         the assignment:
-    //         --- Quiz Summary ---
-    //         Scores entered: <count>
-    //         Sum: <sum>
-    //         Minimum: <minimum>
-    //         Maximum: <maximum>
-    //         Average: <average>
-    //         Letter grade: <letter>
+if (count == 0)
+{
+    std::cout << "No scores were entered." << std::endl;
+    return 0;
+}
+
+double average = (sum * 1.0) / count;
+char letterGrade;
+
+//down here are the boundaries for the grading system
+if (average >= A_CUTOFF)
+{
+    letterGrade = 'A';
+}
+else if (average >= B_CUTOFF)
+{
+    letterGrade = 'B';
+}
+else if (average >= C_CUTOFF)
+{
+    letterGrade = 'C';
+}
+else if (average >= D_CUTOFF)
+{
+    letterGrade = 'D';
+}
+else
+{ 
+    letterGrade = 'F';
+}
+
+//this is where the requirement is for output
+std::cout << "--- Quiz Summary ---" << std::endl;
+std::cout << "Scores entered: " << count << std::endl;
+std::cout << "Sum: " << sum << std::endl;
+std::cout << "Minimum: " << min << std::endl;
+std::cout << "Maximum: " << max << std::endl;
+std::cout << "Average: " << average << std::endl;
+std::cout << "Letter grade: " << letterGrade << std::endl;
+
 
     return 0;
 }
+
